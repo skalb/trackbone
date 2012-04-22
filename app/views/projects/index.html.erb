@@ -1,0 +1,23 @@
+<div id="projects"></div>
+<div id="new-project"></div>
+
+<hr>
+
+<div id="features"></div>
+<div id="new-feature"></div>
+
+<hr>
+
+<div id="bugs"></div>
+<div id="new-bug"></div>
+
+
+<script type="text/javascript">
+  $(function() {
+    // Blog is the app name
+    window.router = new Trackbone.Routers.ProjectsRouter(
+      { projects: <%= @projects.to_json.html_safe -%> }
+    );
+    Backbone.history.start();
+  });
+</script>
