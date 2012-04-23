@@ -6,25 +6,16 @@ class Trackbone.Views.Features.NewView extends Backbone.View
   events:
     "submit #new-feature": "save"
 
-  constructor: (options) ->
-    super(options)
-    @model = new @collection.model()
-
-    @model.bind("change:errors", () =>
-      this.render()
-    )
-
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
-    @model.unset("errors")
-
-    @collection.create(@model.toJSON())
+    name = $("#new-feature #name").val()
+    if name
+      $("#new-feature #name").val('')
+      @collection.create(name: name)
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
-
-    this.$("form").backboneLink(@model)
+    $(@el).html(@template())
 
     return this

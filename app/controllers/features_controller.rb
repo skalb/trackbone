@@ -17,6 +17,7 @@ class FeaturesController < ApplicationController
 
   def create
     @feature = Feature.new(params[:feature])
+    @feature.project_id = params[:project_id]
 
     respond_to do |format|
       if @feature.save

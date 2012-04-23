@@ -15,7 +15,13 @@ class Trackbone.Views.Projects.ProjectView extends Backbone.View
       @model.features.fetch success: ->
         featuresView = new Trackbone.Views.Features.IndexView(features: @model.features)
         $("#features").html(featuresView.render().el)
+
+        # We should ideally only render this one
+        newFeaturesView = new Trackbone.Views.Features.NewView(collection: @model.features)
+        $("#new-features").html(newFeaturesView.render().el)
+
         $("#bugs").html('')
+        $("#new-bugs").html('')
     @model.features.fetch()
 
   destroy: () ->
