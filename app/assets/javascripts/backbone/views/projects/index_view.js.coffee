@@ -15,7 +15,7 @@ class Trackbone.Views.Projects.IndexView extends Backbone.View
     @$("tbody").append(view.render().el)
 
   render: =>
-    $(@el).html(@template(projects: @options.projects.toJSON() ))
+    $(@el).html(@template(projects: @options.projects.toJSON()))
     @addAll()
 
     return this

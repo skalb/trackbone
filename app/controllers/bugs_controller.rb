@@ -10,7 +10,6 @@ class BugsController < ApplicationController
   def show
     @bug = Bug.find(params[:id])
 
-
     respond_to do |format|
       format.json { render json: @bug }
     end

@@ -4,16 +4,11 @@ class Trackbone.Routers.ProjectsRouter extends Backbone.Router
     @projects.reset options.projects
 
   routes:
-    "index"    : "index"
-    ".*"       : "index"
+    ".*" : "index"
 
   index: ->
     @view = new Trackbone.Views.Projects.IndexView(projects: @projects)
-    $("#projects").html(@view.render().el)
+    $("#list-projects").html(@view.render().el)
     
     @newProjectView = new Trackbone.Views.Projects.NewView(collection: @projects)
     $("#new-projects").html(@newProjectView.render().el)
-
-    $("#features").html("")
-
-    $("#bugs").html("")

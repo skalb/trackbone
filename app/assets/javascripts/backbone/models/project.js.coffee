@@ -5,7 +5,7 @@ class Trackbone.Models.Project extends Backbone.Model
     name: null
 
   loadFeatures: ->
-    @features = new Trackbone.Collections.FeaturesCollection([], {project_url: this.url()});
+    @features = new Trackbone.Collections.FeaturesCollection([], {project_url: @url()});
 
 class Trackbone.Collections.ProjectsCollection extends Backbone.Collection
   model: Trackbone.Models.Project
