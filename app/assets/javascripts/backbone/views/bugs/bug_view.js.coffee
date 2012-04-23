@@ -1,12 +1,13 @@
 Trackbone.Views.Bugs ||= {}
 
 class Trackbone.Views.Bugs.BugView extends Backbone.View
-  template: JST["backbone/templates/bugs/bug"]
+  template: JST["backbone/templates/shared/item"]
 
   events:
     "click .destroy" : "destroy"
 
   tagName: "tr"
+  className: "item"
 
   destroy: () ->
     @model.destroy()

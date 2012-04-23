@@ -1,15 +1,17 @@
 Trackbone.Views.Projects ||= {}
 
 class Trackbone.Views.Projects.ProjectView extends Backbone.View
-  template: JST["backbone/templates/projects/project"]
+  template: JST["backbone/templates/shared/item"]
 
   events:
     "click .select" : "select"
     "click .destroy" : "destroy"
 
   tagName: "tr"
+  className: "item"
 
   select: () -> 
+    window.toggleSelected(@el)
     @model.loadFeatures()
     do (@model) ->
       @model.features.fetch success: ->
