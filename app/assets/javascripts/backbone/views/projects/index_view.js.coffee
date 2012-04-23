@@ -5,6 +5,7 @@ class Trackbone.Views.Projects.IndexView extends Backbone.View
 
   initialize: () ->
     @options.projects.bind('reset', @addAll)
+    @options.projects.bind('sync', @render)
 
   addAll: () =>
     @options.projects.each(@addOne)

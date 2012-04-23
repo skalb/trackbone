@@ -6,32 +6,16 @@ class Trackbone.Views.Projects.NewView extends Backbone.View
   events:
     "submit #new-project": "save"
 
-  constructor: (options) ->
-    super(options)
-    @model = new @collection.model()
-
-    @model.bind("change:errors", () =>
-      this.render()
-    )
-
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
-    @model.unset("errors")
-
-    @collection.create(@model.toJSON(),
-      success: (project) =>
-        @model = project
-        window.location.hash = "/#{@model.id}"
-
-      error: (project, jqXHR) =>
-        @model.set({errors: $.parseJSON(jqXHR.responseText)})
-    )
+    name = $("#new-project #name").val()
+    if name
+      $("#new-project #name").val('')
+      @collection.create(name: name)
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
-
-    this.$("form").backboneLink(@model)
+    $(@el).html(@template())
 
     return this

@@ -20,14 +20,7 @@ class Trackbone.Views.Features.NewView extends Backbone.View
 
     @model.unset("errors")
 
-    @collection.create(@model.toJSON(),
-      success: (feature) =>
-        @model = feature
-        window.location.hash = "/#{@model.id}"
-
-      error: (feature, jqXHR) =>
-        @model.set({errors: $.parseJSON(jqXHR.responseText)})
-    )
+    @collection.create(@model.toJSON())
 
   render: ->
     $(@el).html(@template(@model.toJSON() ))
