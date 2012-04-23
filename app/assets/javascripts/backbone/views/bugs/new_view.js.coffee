@@ -6,32 +6,16 @@ class Trackbone.Views.Bugs.NewView extends Backbone.View
   events:
     "submit #new-bug": "save"
 
-  constructor: (options) ->
-    super(options)
-    @model = new @collection.model()
-
-    @model.bind("change:errors", () =>
-      this.render()
-    )
-
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
-    @model.unset("errors")
-
-    @collection.create(@model.toJSON(),
-      success: (bug) =>
-        @model = bug
-        window.location.hash = "/#{@model.id}"
-
-      error: (bug, jqXHR) =>
-        @model.set({errors: $.parseJSON(jqXHR.responseText)})
-    )
+    name = $("#new-bug #name").val()
+    if name
+      $("#new-bug #name").val('')
+      @collection.create(name: name)
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
-
-    this.$("form").backboneLink(@model)
+    $(@el).html(@template())
 
     return this
