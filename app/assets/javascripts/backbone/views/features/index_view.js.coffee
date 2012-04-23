@@ -15,6 +15,5 @@ class Trackbone.Views.Features.IndexView extends Backbone.View
 
   render: =>
     $(@el).html(@template(features: @options.features.toJSON() ))
-    @addAll()
 
     return this

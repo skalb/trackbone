@@ -5,7 +5,6 @@ class Trackbone.Routers.ProjectsRouter extends Backbone.Router
 
   routes:
     "index"    : "index"
-    ":id"      : "show"
     ".*"       : "index"
 
   index: ->
@@ -18,12 +17,3 @@ class Trackbone.Routers.ProjectsRouter extends Backbone.Router
     $("#features").html("")
 
     $("#bugs").html("")
-
-  show: (id) ->
-    project = @projects.get(id)
-
-    # project.loadFeatures()
-    # project.features.fetch success: ->
-    #   @featuresView = new Trackbone.Views.Features.IndexView(features: project.features)
-    #   $("#features").html(@featuresView.render().el)
-    # project.features.fetch()

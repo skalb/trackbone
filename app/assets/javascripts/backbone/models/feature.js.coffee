@@ -4,6 +4,9 @@ class Trackbone.Models.Feature extends Backbone.Model
   defaults:
     name: null
 
+  loadBugs: ->
+    @bugs = new Trackbone.Collections.BugsCollection([], {feature_url: this.url()});
+
 class Trackbone.Collections.FeaturesCollection extends Backbone.Collection
   model: Trackbone.Models.Feature
   initialize: (model, args) ->

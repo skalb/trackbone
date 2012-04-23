@@ -4,11 +4,20 @@ class Trackbone.Views.Features.FeatureView extends Backbone.View
   template: JST["backbone/templates/features/feature"]
 
   events:
+    "click .select" : "select"
     "click .destroy" : "destroy"
 
   tagName: "tr"
 
-  destroy: () ->
+  select: () -> 
+    @model.loadBugs()
+    do (@model) ->
+      @model.bugs.fetch success: ->
+        bugsView = new Trackbone.Views.Bugs.IndexView(bugs: @model.bugs)
+        $("#bugs").html(bugsView.render().el)
+    @model.bugs.fetch()
+
+  destroy:( ) ->
     @model.destroy()
     this.remove()
 

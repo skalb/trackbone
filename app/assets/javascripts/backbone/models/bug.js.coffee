@@ -6,4 +6,6 @@ class Trackbone.Models.Bug extends Backbone.Model
 
 class Trackbone.Collections.BugsCollection extends Backbone.Collection
   model: Trackbone.Models.Bug
-  url: '/bugs'
+  initialize: (model, args) ->
+    @url = ->
+      args.feature_url + "/bugs"
