@@ -8,6 +8,8 @@ class Trackbone.Views.Features.IndexView extends Backbone.View
     @options.features.bind('reset', @addAll)
 
   addAll: () =>
+    # I didn't figure out exactly why this reset was needed,
+    # but without it the features are listed twice.
     @$("tbody").html('')
     @options.features.each(@addOne)
 
