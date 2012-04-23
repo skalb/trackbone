@@ -10,6 +10,7 @@ class BugsController < ApplicationController
   def show
     @bug = Bug.find(params[:id])
 
+
     respond_to do |format|
       format.json { render json: @bug }
     end
@@ -17,10 +18,11 @@ class BugsController < ApplicationController
 
   def create
     @bug = Bug.new(params[:bug])
+    @bug.feature_id = params[:feature_id]
 
     respond_to do |format|
       if @bug.save
-        format.json { render json: @bug, status: :created, location: @bug }
+        format.json { render json: @bug, status: :created}
       else
         format.json { render json: @bug.errors, status: :unprocessable_entity }
       end

@@ -15,6 +15,11 @@ class Trackbone.Views.Features.FeatureView extends Backbone.View
       @model.bugs.fetch success: ->
         bugsView = new Trackbone.Views.Bugs.IndexView(bugs: @model.bugs)
         $("#bugs").html(bugsView.render().el)
+
+        # We should probably only render this once instead of each load
+        newBugsView = new Trackbone.Views.Bugs.NewView(collection: @model.new)
+        $("#bugs-bugs").html(newBugsView.render().el)
+
     @model.bugs.fetch()
 
   destroy:( ) ->

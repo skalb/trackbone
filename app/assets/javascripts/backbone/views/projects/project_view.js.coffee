@@ -16,7 +16,7 @@ class Trackbone.Views.Projects.ProjectView extends Backbone.View
         featuresView = new Trackbone.Views.Features.IndexView(features: @model.features)
         $("#features").html(featuresView.render().el)
 
-        # We should ideally only render this one
+        # We should probably only render this once instead of each load
         newFeaturesView = new Trackbone.Views.Features.NewView(collection: @model.features)
         $("#new-features").html(newFeaturesView.render().el)
 

@@ -5,8 +5,10 @@ class Trackbone.Views.Features.IndexView extends Backbone.View
 
   initialize: () ->
     @options.features.bind('sync', @render)
+    @options.features.bind('reset', @addAll)
 
   addAll: () =>
+    @$("tbody").html('')
     @options.features.each(@addOne)
 
   addOne: (feature) =>
