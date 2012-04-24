@@ -1,3 +1,15 @@
 Prototype single page project management app.
 
 Demo: http://young-flower-9677.herokuapp.com/
+
+
+Dependenciese:
+Rvm
+Ruby
+Bundler
+
+To setup locally:
+
+$ bundle install --withou production
+$ rake db:create db:migrate
+$ rails s
