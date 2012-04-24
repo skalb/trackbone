@@ -1,37 +1,17 @@
+#= require ../item_view
+
 Trackbone.Views.Projects ||= {}
 
-class Trackbone.Views.Projects.ProjectView extends Backbone.View
+class Trackbone.Views.Projects.ProjectView extends Trackbone.Views.ItemView
   template: JST["backbone/templates/item"]
 
-  events:
-    "click .select" : "select"
-    "click .destroy" : "destroy"
+  renderChildren: (children) -> 
+    featuresView = new Trackbone.Views.Features.IndexView(items: children)
+    $("#list-features").html(featuresView.render().el)
 
-  tagName: "tr"
-  className: "item"
+    # We should probably only render this once instead of each load
+    newFeaturesView = new Trackbone.Views.Features.NewView(collection: children)
+    $("#new-features").html(newFeaturesView.render().el)
 
-  select: () -> 
-    window.toggleSelected(@el)
-    @model.loadFeatures()
-    do (@model) ->
-      @model.features.fetch success: ->
-        featuresView = new Trackbone.Views.Features.IndexView(items: @model.features)
-        $("#list-features").html(featuresView.render().el)
-
-        # We should probably only render this once instead of each load
-        newFeaturesView = new Trackbone.Views.Features.NewView(collection: @model.features)
-        $("#new-features").html(newFeaturesView.render().el)
-
-        $("#list-bugs").html('')
-        $("#new-bugs").html('')
-    @model.features.fetch()
-
-  destroy: () ->
-    @model.destroy()
-    this.remove()
-
-    return false
-
-  render: ->
-    $(@el).html(@template(@model.toJSON() ))
-    return this
+    $("#list-bugs").html('')
+    $("#new-bugs").html('')
