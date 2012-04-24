@@ -5,12 +5,17 @@ class Trackbone.Views.IndexView extends Backbone.View
 
   initialize: () ->
     @options.items.bind('reset', @addAll)
-    @options.items.bind('sync', @render)
+    @options.items.bind('sync', @addAll)
 
   addAll: () =>
+    # This shouldn't be needed, but for some reason
+    # lists are rendered twice
+    @$("tbody").html('')
+
     @options.items.each(@addOne)
 
   addOne: (item) =>
+    item.collection = @options.items
     @$("tbody").append(@getView(item).render().el)
 
   render: =>

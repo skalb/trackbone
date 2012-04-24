@@ -3,6 +3,12 @@ Trackbone.Views.Features ||= {}
 class Trackbone.Views.Features.FeatureView extends Backbone.View
   template: JST["backbone/templates/item"]
 
+  initialize: () ->
+    # For some reason, the model no longer has a reference to
+    # it's collection when we select() it
+    # As a hack, I'm keeping a reference to the collection
+    @collection = @options.model.collection
+
   events:
     "click .select" : "select"
     "click .destroy" : "destroy"
@@ -12,6 +18,11 @@ class Trackbone.Views.Features.FeatureView extends Backbone.View
 
   select: () -> 
     window.toggleSelected(@el)
+    
+    # This is a hack to get around the unexplained reason
+    # why model.collection is undef at this point 
+    @model.collection = @collection
+    
     @model.loadBugs()
     do (@model) ->
       @model.bugs.fetch success: ->
@@ -25,6 +36,10 @@ class Trackbone.Views.Features.FeatureView extends Backbone.View
     @model.bugs.fetch()
 
   destroy:( ) ->
+    # This is a hack to get around the unexplained reason
+    # why model.collection is undef at this point 
+    @model.collection = @collection
+
     @model.destroy()
     this.remove()
 
