@@ -10,7 +10,7 @@ class Trackbone.Views.Projects.ProjectView extends Trackbone.Views.ItemView
     $("#list-features").html(featuresView.render().el)
 
     # We should probably only render this once instead of each load
-    newFeaturesView = new Trackbone.Views.Features.NewView(collection: children)
+    newFeaturesView = new Trackbone.Views.NewView(collection: children, type: "Features")
     $("#new-features").html(newFeaturesView.render().el)
 
     $("#list-bugs").html('')

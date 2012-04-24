@@ -10,5 +10,5 @@ class Trackbone.Routers.ProjectsRouter extends Backbone.Router
     view = new Trackbone.Views.Projects.IndexView(items: @projects)
     $("#list-projects").html(view.render().el)
     
-    newProjectView = new Trackbone.Views.Projects.NewView(collection: @projects)
+    newProjectView = new Trackbone.Views.NewView(collection: @projects, type: "Projects")
     $("#new-projects").html(newProjectView.render().el)

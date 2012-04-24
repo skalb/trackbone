@@ -1,21 +1,21 @@
 Trackbone.Views.Projects ||= {}
 
-class Trackbone.Views.Projects.NewView extends Backbone.View
+class Trackbone.Views.NewView extends Backbone.View
   template: JST["backbone/templates/new"]
 
   events:
-    "submit #new-project": "save"
+    "submit #new-item": "save"
 
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
-    name = $("#new-project #name").val()
+    name = @.$("#new-item #name").val()
     if name
-      $("#new-project #name").val('')
+      $("#new-item #name").val('')
       @collection.create(name: name)
 
   render: ->
-    $(@el).html(@template(type: "Project"))
+    $(@el).html(@template(type: @options.type))
 
     return this
