@@ -7,5 +7,5 @@ class Trackbone.Views.Bugs.IndexView extends Trackbone.Views.IndexView
     super
     @options.type = "Bugs"
 
-  getView: (bug) =>
-    new Trackbone.Views.Bugs.BugView({model: bug})
+  getView: (options) =>
+    new Trackbone.Views.Bugs.BugView(options)

@@ -7,5 +7,5 @@ class Trackbone.Views.Features.IndexView extends Trackbone.Views.IndexView
     super
     @options.type = "Features"
 
-  getView: (feature) =>
-    new Trackbone.Views.Features.FeatureView({model: feature})
+  getView: (options) =>
+    new Trackbone.Views.Features.FeatureView(options)

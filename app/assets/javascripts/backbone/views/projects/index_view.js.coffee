@@ -7,5 +7,5 @@ class Trackbone.Views.Projects.IndexView extends Trackbone.Views.IndexView
     super
     @options.type = "Projects"
 
-  getView: (project) =>
-    new Trackbone.Views.Projects.ProjectView({model: project})
+  getView: (options) =>
+    new Trackbone.Views.Projects.ProjectView(options)
