@@ -7,8 +7,8 @@ class Trackbone.Routers.ProjectsRouter extends Backbone.Router
     ".*" : "index"
 
   index: ->
-    @view = new Trackbone.Views.Projects.IndexView(projects: @projects)
-    $("#list-projects").html(@view.render().el)
+    view = new Trackbone.Views.Projects.IndexView(items: @projects)
+    $("#list-projects").html(view.render().el)
     
-    @newProjectView = new Trackbone.Views.Projects.NewView(collection: @projects)
-    $("#new-projects").html(@newProjectView.render().el)
+    newProjectView = new Trackbone.Views.Projects.NewView(collection: @projects)
+    $("#new-projects").html(newProjectView.render().el)

@@ -15,7 +15,7 @@ class Trackbone.Views.Projects.ProjectView extends Backbone.View
     @model.loadFeatures()
     do (@model) ->
       @model.features.fetch success: ->
-        featuresView = new Trackbone.Views.Features.IndexView(items: @model.features)
+        featuresView = new Trackbone.Views.Features.IndexView(features: @model.features)
         $("#list-features").html(featuresView.render().el)
 
         # We should probably only render this once instead of each load

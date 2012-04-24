@@ -1,22 +1,10 @@
+#= require ../index_view
+
 Trackbone.Views.Bugs ||= {}
 
-class Trackbone.Views.Bugs.IndexView extends Backbone.View
-  template: JST["backbone/templates/index"]
-
+class Trackbone.Views.Bugs.IndexView extends Trackbone.Views.IndexView
   initialize: () ->
-    @options.bugs.bind('sync', @render)
-    @options.bugs.bind('reset', @addAll)
+    @options.type = "Bugs"
 
-  addAll: () =>
-    @$("tbody").html('')
-    @options.bugs.each(@addOne)
-
-  addOne: (bug) =>
-    view = new Trackbone.Views.Bugs.BugView({model : bug})
-    @$("tbody").append(view.render().el)
-
-  render: =>
-    $(@el).html(@template(type: "Bugs"))
-    @addAll()
-
-    return this
+  getView: (bug) =>
+    new Trackbone.Views.Bugs.BugViews({model: bug})

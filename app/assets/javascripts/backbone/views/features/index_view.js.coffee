@@ -1,24 +1,10 @@
+#= require ../index_view
+
 Trackbone.Views.Features ||= {}
 
-class Trackbone.Views.Features.IndexView extends Backbone.View
-  template: JST["backbone/templates/index"]
-
+class Trackbone.Views.Features.IndexView extends Trackbone.Views.IndexView
   initialize: () ->
-    @options.features.bind('sync', @render)
-    @options.features.bind('reset', @addAll)
+    @options.type = "Features"
 
-  addAll: () =>
-    # I didn't figure out exactly why this reset was needed,
-    # but without it the features are listed twice.
-    @$("tbody").html('')
-    @options.features.each(@addOne)
-
-  addOne: (feature) =>
-    view = new Trackbone.Views.Features.FeatureView({model : feature})
-    @$("tbody").append(view.render().el)
-
-  render: =>
-    $(@el).html(@template(type: "Features"))
-    @addAll()
-
-    return this
+  getView: (feature) =>
+    new Trackbone.Views.Features.FeatureView({model: feature})
