@@ -11,9 +11,8 @@ class Trackbone.Views.ItemView extends Backbone.View
   className: "item"
 
   select: () -> 
-    window.toggleSelected(@el)
-
     if @model.loadChildren
+      window.toggleSelected(@el)
       @model.loadChildren()
       do (@model, @renderChildren) ->
         @model.children.fetch(
