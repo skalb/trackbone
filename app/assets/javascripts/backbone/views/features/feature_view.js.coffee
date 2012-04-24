@@ -1,7 +1,7 @@
 Trackbone.Views.Features ||= {}
 
 class Trackbone.Views.Features.FeatureView extends Backbone.View
-  template: JST["backbone/templates/shared/item"]
+  template: JST["backbone/templates/item"]
 
   events:
     "click .select" : "select"
@@ -31,5 +31,5 @@ class Trackbone.Views.Features.FeatureView extends Backbone.View
     return false
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template(@model.toJSON()))
     return this

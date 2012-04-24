@@ -1,7 +1,7 @@
 Trackbone.Views.Features ||= {}
 
 class Trackbone.Views.Features.NewView extends Backbone.View
-  template: JST["backbone/templates/features/new"]
+  template: JST["backbone/templates/new"]
 
   events:
     "submit #new-feature": "save"
@@ -16,6 +16,6 @@ class Trackbone.Views.Features.NewView extends Backbone.View
       @collection.create(name: name)
 
   render: ->
-    $(@el).html(@template())
+    $(@el).html(@template(type: "Feature"))
 
     return this

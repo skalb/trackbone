@@ -1,7 +1,7 @@
 Trackbone.Views.Projects ||= {}
 
 class Trackbone.Views.Projects.ProjectView extends Backbone.View
-  template: JST["backbone/templates/shared/item"]
+  template: JST["backbone/templates/item"]
 
   events:
     "click .select" : "select"

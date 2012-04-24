@@ -1,7 +1,7 @@
 Trackbone.Views.Features ||= {}
 
 class Trackbone.Views.Features.IndexView extends Backbone.View
-  template: JST["backbone/templates/features/index"]
+  template: JST["backbone/templates/index"]
 
   initialize: () ->
     @options.features.bind('sync', @render)
@@ -18,7 +18,7 @@ class Trackbone.Views.Features.IndexView extends Backbone.View
     @$("tbody").append(view.render().el)
 
   render: =>
-    $(@el).html(@template(features: @options.features.toJSON() ))
+    $(@el).html(@template(type: "Features"))
     @addAll()
 
     return this

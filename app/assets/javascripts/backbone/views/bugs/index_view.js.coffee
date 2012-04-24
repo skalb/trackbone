@@ -1,7 +1,7 @@
 Trackbone.Views.Bugs ||= {}
 
 class Trackbone.Views.Bugs.IndexView extends Backbone.View
-  template: JST["backbone/templates/bugs/index"]
+  template: JST["backbone/templates/index"]
 
   initialize: () ->
     @options.bugs.bind('sync', @render)
@@ -16,7 +16,7 @@ class Trackbone.Views.Bugs.IndexView extends Backbone.View
     @$("tbody").append(view.render().el)
 
   render: =>
-    $(@el).html(@template(bugs: @options.bugs.toJSON() ))
+    $(@el).html(@template(type: "Bugs"))
     @addAll()
 
     return this

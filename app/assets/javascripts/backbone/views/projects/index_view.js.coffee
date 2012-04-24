@@ -1,7 +1,7 @@
 Trackbone.Views.Projects ||= {}
 
 class Trackbone.Views.Projects.IndexView extends Backbone.View
-  template: JST["backbone/templates/projects/index"]
+  template: JST["backbone/templates/index"]
 
   initialize: () ->
     @options.projects.bind('reset', @addAll)
@@ -15,7 +15,7 @@ class Trackbone.Views.Projects.IndexView extends Backbone.View
     @$("tbody").append(view.render().el)
 
   render: =>
-    $(@el).html(@template(projects: @options.projects.toJSON()))
+    $(@el).html(@template(type: "Projects"))
     @addAll()
 
     return this

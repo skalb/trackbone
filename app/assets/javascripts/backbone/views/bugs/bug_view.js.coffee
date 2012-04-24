@@ -1,7 +1,7 @@
 Trackbone.Views.Bugs ||= {}
 
 class Trackbone.Views.Bugs.BugView extends Backbone.View
-  template: JST["backbone/templates/shared/item"]
+  template: JST["backbone/templates/item"]
 
   events:
     "click .destroy" : "destroy"
@@ -16,5 +16,5 @@ class Trackbone.Views.Bugs.BugView extends Backbone.View
     return false
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template(@model.toJSON()))
     return this
