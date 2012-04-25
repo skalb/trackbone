@@ -4,21 +4,10 @@ class Trackbone.Views.ItemView extends Backbone.View
   template: JST["backbone/templates/item"]
 
   events:
-    "click .select" : "select"
     "click .destroy" : "destroy"
 
   tagName: "tr"
   className: "item"
-
-  select: () -> 
-    if @model.loadChildren
-      window.toggleSelected(@el)
-      @model.loadChildren()
-      do (@model, @renderChildren) ->
-        @model.children.fetch(
-          success: @renderChildren(@model.children)
-        )
-        @model.children.fetch()
 
   destroy: () ->
     @model.destroy()
@@ -27,5 +16,10 @@ class Trackbone.Views.ItemView extends Backbone.View
     return false
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    name = @model.get("name")
+    id = @model.get("id")
+    url = "#{@model.collection.url()}/#{id}"
+    $(@el).html(@template(name: name, id: id, url: url))
+    if (@options.selected)
+      window.toggleSelected(@el)
     return this

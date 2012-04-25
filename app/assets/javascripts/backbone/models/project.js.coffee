@@ -9,4 +9,7 @@ class Trackbone.Models.Project extends Backbone.Model
 
 class Trackbone.Collections.ProjectsCollection extends Backbone.Collection
   model: Trackbone.Models.Project
-  url: '/projects'
+  initialize: (model, args) ->
+    @url = ->
+      "/projects"
+

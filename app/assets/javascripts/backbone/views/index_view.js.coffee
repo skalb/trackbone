@@ -16,7 +16,9 @@ class Trackbone.Views.IndexView extends Backbone.View
 
   addOne: (item) =>
     item.collection = @options.items
-    @$("tbody").append(@getView({model: item}).render().el)
+    selected = item.id == +@options.id
+    view = new Trackbone.Views.ItemView({model: item, selected: selected})
+    @$("tbody").append(view.render().el)
 
   render: =>
     $(@el).html(@template(type: @options.type))
