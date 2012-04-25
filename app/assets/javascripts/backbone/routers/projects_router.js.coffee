@@ -8,47 +8,42 @@ class Trackbone.Routers.ProjectsRouter extends Backbone.Router
     "projects/:project_id" : "showProjects"
     "projects/:project_id/features/:feature_id/*" : "showProjects"
 
+  clearType: (model) ->
+    $("#list-#{model}").html('')
+    $("#new-#{model}").html('')
+
+  loadChildren: (items, item_id, child_ids, callback) ->
+    item = items.get(item_id)
+    item.loadChildren()
+    item.children.fetch(
+      success: =>
+        @[callback](item.children, child_ids.shift(), child_ids)
+    )
+    item.children.fetch()
+
+  renderView: (selector, view) ->
+    $(selector).html(view.render().el)
+
+  renderViews: (items, item_id, type) ->
+    indexView = new Trackbone.Views.IndexView(items: items, id: item_id, type: type)
+    @renderView("#list-#{type.toLowerCase()}", indexView)
+
+    newView = new Trackbone.Views.NewView(collection: items, type: type)
+    @renderView("#new-#{type.toLowerCase()}", newView)
+
   showProjects: (project_id, feature_id, bug_id) ->
-    view = new Trackbone.Views.IndexView(items: @projects, id: project_id, type: "Projects")
-    $("#list-projects").html(view.render().el)
+    @renderViews(@projects, project_id, "Projects")
 
-    newProjectView = new Trackbone.Views.NewView(collection: @projects, type: "Projects")
-    $("#new-projects").html(newProjectView.render().el)
+    if project_id
+      @loadChildren(@projects, project_id, [feature_id, bug_id], "loadFeatures")
 
-    if (project_id)
-      project = @projects.get(project_id)
-      project.loadChildren()
-      project.children.fetch(
-        success: =>
-          @loadFeatures(project.children, feature_id)
-      )
-      project.children.fetch()
+  loadFeatures: (features, feature_id, child_ids) ->
+    @renderViews(features, feature_id, "Features")
 
-  loadFeatures: (features, feature_id) ->
-    featuresView = new Trackbone.Views.IndexView(items: features, id: feature_id, type: "Features")
-    $("#list-features").html(featuresView.render().el)
-
-    # We should probably only render this once instead of each load
-    newFeaturesView = new Trackbone.Views.NewView(collection: features, type: "Features")
-    $("#new-features").html(newFeaturesView.render().el)
-
-    if (feature_id)
-      feature = features.get(feature_id)
-      feature.loadChildren()
-      feature.children.fetch(
-        success: =>
-          @loadBugs(feature.children, feature_id)
-      )
-      feature.children.fetch()
+    if feature_id
+      @loadChildren(features, feature_id, child_ids, "loadBugs")
     else
-      $("#list-bugs").html('')
-      $("#new-bugs").html('')
+      @clearType("bugs")
 
-
-  loadBugs: (bugs) -> 
-    bugsView = new Trackbone.Views.IndexView(items: bugs, type: "Bugs")
-    $("#list-bugs").html(bugsView.render().el)
-
-    # We should probably only render this once instead of each load
-    newBugsView = new Trackbone.Views.NewView(collection: bugs, type: "Bugs")
-    $("#new-bugs").html(newBugsView.render().el)
+  loadBugs: (bugs, bug_id, child_ids) -> 
+    @renderViews(bugs, bug_id, "Bugs")

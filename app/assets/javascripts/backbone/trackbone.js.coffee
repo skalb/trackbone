@@ -12,4 +12,3 @@ window.Trackbone =
 
 window.toggleSelected = (el) ->
   $(el).addClass('selected')
-  # $(el).siblings().removeClass('selected')
